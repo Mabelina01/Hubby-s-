@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Happy Boyfriend’s Day 💖</title>
+  <style>
+    body {
+      font-family: "Segoe UI", sans-serif;
+      text-align: center;
+      background: linear-gradient(135deg, #ffe6f0, #d9c6ff);
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
+
+    header {
+      padding: 40px;
+    }
+
+    h1 {
+      font-size: 2.5em;
+      color: #8e44ad;
+    }
+
+    button {
+      background: #ff69b4;
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      font-size: 1em;
+      margin: 10px;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #e84393;
+    }
+
+    #loveNote {
+      font-size: 1.4em;
+      margin-top: 20px;
+      padding: 15px;
+      color: #2c3e50;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+      padding: 20px;
+    }
+
+    .gallery img {
+      width: 100%;
+      border-radius: 15px;
+      box-shadow: 0px 4px 6px rgba(0,0,0,0.2);
+    }
+
+    footer {
+      margin-top: 30px;
+      padding: 15px;
+      font-size: 0.9em;
+      background: rgba(255,255,255,0.6);
+    }
+
+    section {
+      padding: 20px;
+    }
+
+    h2 {
+      color: #6c3483;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Happy Boyfriend’s Day, My Love 💕</h1>
+    <p>This website is just for you… because you’re the best thing in my world 🥰</p>
+    <button onclick="showLoveNote()">Click for a Love Note 💌</button>
+    <div id="loveNote"></div>
+  </header>
+
+  <section>
+    <h2>Our Memories 📸</h2>
+    <div class="gallery">
+      <!-- Replace the links below with your own image links -->
+      <img src="https://via.placeholder.com/300x200.png?text=Us+1" alt="Memory 1">
+      <img src="https://via.placeholder.com/300x200.png?text=Us+2" alt="Memory 2">
+      <img src="https://via.placeholder.com/300x200.png?text=Us+3" alt="Memory 3">
+    </div>
+    <p><i>(Replace these pictures with ours 💖)</i></p>
+  </section>
+
+  <section>
+    <h2>Countdown to Boyfriend’s Day ⏳</h2>
+    <p id="countdown"></p>
+  </section>
+
+  <section>
+    <h2>Quiz Time! 📝</h2>
+    <p>Let’s see how well you know me 😘</p>
+    <div id="quiz"></div>
+    <button onclick="checkQuiz()">Submit Answers</button>
+    <p id="quizResult"></p>
+  </section>
+
+  <footer>
+    Made with ❤️ by your girlfriend
+  </footer>
+
+  <script>
+    // Love notes
+    const notes = [
+      "I love you more than words can say 💖",
+      "You make my world brighter 🌎✨",
+      "Every day with you is my favorite day 🥰",
+      "You're my forever and always 💕",
+      "Thinking of you makes me smile 😊",
+      "My safe place is anywhere with you 💝",
+      "You’re the reason Boyfriend’s Day is so special 🌹"
+    ];
+
+    function showLoveNote() {
+      const randomNote = notes[Math.floor(Math.random() * notes.length)];
+      document.getElementById("loveNote").innerText = randomNote;
+    }
+
+    // Countdown to Boyfriend’s Day (October 3, 2025)
+    const targetDate = new Date("2025-10-03T00:00:00").getTime();
+    const countdownElement = document.getElementById("countdown");
+
+    setInterval(() => {
+      const now = new Date().getTime();
+      const distance = targetDate - now;
+
+      if (distance < 0) {
+        countdownElement.innerText = "Happy Boyfriend’s Day! 🎉💑";
+        return;
+      }
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      countdownElement.innerText = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+    }, 1000);
+
+    // Quiz
+    const quizQuestions = [
+      {
+        question: "What’s my favorite color?",
+        options: ["Blue", "Pink", "Black", "Green"],
+        answer: "Pink"
+      },
+      {
+        question: "Where did we first meet?",
+        options: ["School", "Online", "Church", "Market"],
+        answer: "School"
+      },
+      {
+        question: "Who said 'I love you' first?",
+        options: ["Me", "You 😏"],
+        answer: "Me"
+      }
+    ];
+
+    const quizContainer = document.getElementById("quiz");
+
+    quizQuestions.forEach((q, index) => {
+      let qHTML = `<h3>${q.question}</h3>`;
+      q.options.forEach(opt => {
+        qHTML += `
+          <label>
+            <input type="radio" name="q${index}" value="${opt}">
+            ${opt}
+          </label><br>`;
+      });
+      quizContainer.innerHTML += qHTML;
+    });
+
+    function checkQuiz() {
+      let score = 0;
+      quizQuestions.forEach((q, index) => {
+        const selected = document.querySelector(`input[name="q${index}"]:checked`);
+        if (selected && selected.value === q.answer) {
+          score++;
+        }
+      });
+      document.getElementById("quizResult").innerText =
+        `You got ${score}/${quizQuestions.length} correct! 💕`;
+    }
+  </script>
+</body>
+</html>
